@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { components } from "react";
 
 import { FaGithub } from "react-icons/fa";
 // import MyNavbar from "./navbar";
