@@ -1,36 +1,41 @@
 import React, { Component } from "react";
+import React, { useState } from "react";
+import { MdMovieFilter } from "react-icons/md";
+import SearchBox from "./component/search";
 
-import {
-  Container,
-  Row,
-  Col,
-  Navbar,
-  Nav,
-  FormControl,
-  Form,
-  Button,
-  InputGroup,
-} from "react-bootstrap";
+import { Navbar, Nav, Spinner } from "react-bootstrap";
 
-export default function MyNavbar() {
+export default function myNavbar() {
+  const [show, setShow] = useState(true);
+  const onSearch = () => {
+    setShow(false);
+    setInterval(() => {
+      setShow(true);
+    }, 2000);
+  };
   return (
-    <Navbar className="bg-light justify-content-between">
-      <Form inline>
-        <InputGroup>
-          <InputGroup.Prepend>
-            <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl
-            placeholder="Username"
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
-      </Form>
-      <Form inline>
-        <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
-        <Button type="submit">Submit</Button>
-      </Form>
-    </Navbar>
+    <>
+      <Navbar bg="light" variant="light">
+        <Navbar.Brand href="#home">
+          <MdMovieFilter size="2.5rem" color="#17a2b8" />
+        </Navbar.Brand>
+        <Nav className="ml-auto">
+          <Nav.Link href="#home" className="mr-5">
+            HOME
+          </Nav.Link>
+        </Nav>
+        <Spinner
+          animation="border"
+          role="status"
+          className="m-2"
+          variant="info"
+          hidden={show}
+        >
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+
+        <SearchBox onSearch={onSearch} />
+      </Navbar>
+    </>
   );
 }
